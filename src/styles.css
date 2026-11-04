@@ -1,0 +1,282 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Aabha design system
+ * -------------------
+ * Palette: ivory + champagne neutrals, deep-maroon primary, antique-gold accents.
+ * All colors are oklch tokens registered in @theme inline below.
+ * Typography: Cormorant Garamond (display) + Manrope (body), loaded via <link>
+ * tags in src/routes/__root.tsx (never @import a remote font here).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-soft: var(--gold-soft);
+  --color-maroon-soft: var(--maroon-soft);
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Ivory / champagne neutrals */
+  --background: oklch(0.977 0.012 90);
+  --foreground: oklch(0.27 0.03 40);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.03 40);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.03 40);
+
+  /* Deep maroon primary */
+  --primary: oklch(0.38 0.095 28);
+  --primary-foreground: oklch(0.97 0.015 85);
+
+  /* Champagne secondary */
+  --secondary: oklch(0.943 0.032 88);
+  --secondary-foreground: oklch(0.36 0.06 42);
+
+  --muted: oklch(0.955 0.02 88);
+  --muted-foreground: oklch(0.51 0.03 60);
+  --accent: oklch(0.935 0.045 85);
+  --accent-foreground: oklch(0.36 0.06 42);
+  --destructive: oklch(0.577 0.215 27);
+  --destructive-foreground: oklch(0.985 0.005 85);
+  --border: oklch(0.9 0.03 85);
+  --input: oklch(0.9 0.03 85);
+  --ring: oklch(0.72 0.1 82);
+
+  /* Antique gold accents */
+  --gold: oklch(0.75 0.115 84);
+  --gold-deep: oklch(0.6 0.095 74);
+  --gold-soft: oklch(0.9 0.06 88);
+  --maroon-soft: oklch(0.5 0.09 30);
+}
+
+.dark {
+  --background: oklch(0.19 0.02 40);
+  --foreground: oklch(0.95 0.02 85);
+  --card: oklch(0.24 0.025 42);
+  --card-foreground: oklch(0.95 0.02 85);
+  --popover: oklch(0.24 0.025 42);
+  --popover-foreground: oklch(0.95 0.02 85);
+  --primary: oklch(0.78 0.11 84);
+  --primary-foreground: oklch(0.22 0.03 40);
+  --secondary: oklch(0.3 0.03 45);
+  --secondary-foreground: oklch(0.95 0.02 85);
+  --muted: oklch(0.3 0.03 45);
+  --muted-foreground: oklch(0.72 0.03 75);
+  --accent: oklch(0.32 0.035 45);
+  --accent-foreground: oklch(0.95 0.02 85);
+  --destructive: oklch(0.7 0.19 25);
+  --destructive-foreground: oklch(0.98 0.005 85);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.72 0.1 82);
+  --gold: oklch(0.8 0.115 84);
+  --gold-deep: oklch(0.66 0.1 76);
+  --gold-soft: oklch(0.35 0.04 70);
+  --maroon-soft: oklch(0.72 0.09 30);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Offset for the sticky header + category bar when jumping to anchors */
+    scroll-padding-top: 7.5rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+/* ---------- Custom utilities ---------- */
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Elegant gold gradient used for headings, badges and the logo accent */
+@utility text-gradient-gold {
+  background-image: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    var(--gold) 45%,
+    var(--gold-deep) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-gold {
+  background-image: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    var(--gold) 50%,
+    var(--gold-deep) 100%
+  );
+}
+
+@utility bg-gradient-maroon {
+  background-image: linear-gradient(
+    120deg,
+    oklch(0.3 0.085 28) 0%,
+    oklch(0.42 0.1 30) 60%,
+    oklch(0.34 0.09 28) 100%
+  );
+}
+
+@utility shadow-elegant {
+  box-shadow:
+    0 1px 2px oklch(0.3 0.04 45 / 6%),
+    0 12px 32px -12px oklch(0.35 0.06 45 / 22%);
+}
+
+@utility shadow-lift {
+  box-shadow:
+    0 2px 4px oklch(0.3 0.04 45 / 8%),
+    0 20px 44px -16px oklch(0.35 0.06 45 / 30%);
+}
+
+/* Decorative hairline flourish used around section titles */
+@utility gold-rule {
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--gold),
+    transparent
+  );
+}
+
+/* ---------- Motion & polish ---------- */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+@utility animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Scroll reveal: progressive enhancement, content is visible without it */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@utility bg-ivory-glow {
+  background-image:
+    radial-gradient(60rem 30rem at 85% -10%, oklch(0.9 0.07 85 / 55%), transparent 60%),
+    radial-gradient(45rem 28rem at -10% 20%, oklch(0.88 0.05 30 / 35%), transparent 60%);
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, var(--background) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+@utility ticket-notch {
+  mask-image:
+    radial-gradient(circle 9px at 0 50%, transparent 98%, #000),
+    radial-gradient(circle 9px at 100% 50%, transparent 98%, #000);
+  mask-composite: intersect;
+}
+
+@layer base {
+  ::selection {
+    background: var(--gold);
+    color: oklch(0.22 0.04 40);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  body {
+    letter-spacing: 0.005em;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-timeline: auto !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
